@@ -1,0 +1,16 @@
+# Source files (dist/ is what gets published)
+src/
+
+# Development files
+.prepr/
+.preprignore
+tsconfig.json
+.DS_Store
+**/.DS_Store
+
+# Git
+.git/
+.github/
+
+# Logs
+*.log

@@ -1,7 +1,7 @@
 {
-  "name": "prepr",
+  "name": "prepr-cli",
   "version": "1.0.0",
-  "description": "",
+  "description": "PR Risk Analyzer — scores merge safety and blocks unsafe pull requests",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -9,8 +9,8 @@
     "dev": "tsx src/index.ts scan",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["pr", "git", "code-review", "risk", "ci", "github-actions", "devtools"],
+  "author": "abhirajthealmighty",
   "license": "ISC",
   "type": "module",
   "dependencies": {
@@ -25,6 +25,6 @@
     "typescript": "^5.9.3"
   },
   "bin": {
-    "prepr": "./dist/index.js"
+    "prepr": "dist/index.js"
   }
 }
