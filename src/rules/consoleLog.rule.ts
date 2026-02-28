@@ -2,27 +2,28 @@ import { Rule, Violation } from "./types.js";
 
 export const ConsoleLogRule: Rule = {
   name: "console-log",
+  description: "Detects console statements added in the diff",
+  scope: "line",
+  enabledByDefault: true,
 
   check(analysis) {
     const violations: Violation[] = [];
 
     for (const file of analysis.files) {
-      const lines: number[] = [];
+      const matchedLines = file.lines.filter(
+        line => line.type === "added" && line.content.includes("console.")
+      );
 
-      for (const line of file.lines) {
-        if (
-          line.type === "added" &&
-          line.content.includes("console.")
-        ) {
-          lines.push(line.lineNumber);
-        }
-      }
-
-      if (lines.length > 0) {
+      if (matchedLines.length > 0) {
         violations.push({
-          message: `Console statements found at lines ${lines.join(", ")}`,
+          message: `Console statements found at lines ${matchedLines.map(l => l.lineNumber).join(", ")}`,
           severity: "low",
-          file: file.filePath
+          confidence: "low",
+          file: file.filePath,
+          lines: matchedLines.map(l => ({
+            lineNumber: l.lineNumber,
+            content: l.content.trim()
+          }))
         });
       }
     }

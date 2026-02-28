@@ -1,0 +1,17 @@
+{
+  "baseBranch": "main",
+  "maxPRLines": 300,
+  "ignore": [
+    "dist/",
+    "node_modules/",
+    "src/rules/",
+    "src/formatter/",
+    "src/scoring/"
+  ],
+  "rules": {
+    "large-pr": true,
+    "risky-file": true,
+    "todo-detector": true,
+    "console-log": true
+  }
+}

@@ -19,6 +19,9 @@ const INFRA_PATTERNS = [
 
 export const RiskyFileRule: Rule = {
   name: "risky-file",
+  description: "Flags modifications to sensitive files such as auth, payment, config, and infrastructure",
+  scope: "file",
+  enabledByDefault: true,
 
   check(analysis) {
     const violations: Violation[] = [];
@@ -32,7 +35,7 @@ export const RiskyFileRule: Rule = {
         violations.push({
           message: `Infrastructure change detected: ${file.filePath}`,
           severity: "high",
-          file: file.filePath
+          confidence: "high"
         });
         continue;
       }
@@ -43,7 +46,7 @@ export const RiskyFileRule: Rule = {
         violations.push({
           message: `Risky file modified: ${file.filePath}`,
           severity: "high",
-          file: file.filePath
+          confidence: "high"
         });
       }
     }

@@ -1,0 +1,89 @@
+name: PrePr Risk Analysis
+
+on:
+  pull_request:
+    branches: ["main", "master"]
+
+jobs:
+  prepr:
+    name: PR Risk Analysis
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run PrePr scan
+        id: prepr
+        run: |
+          npx prepr@latest scan --format json --html --base ${{ github.base_ref }} > prepr-result.json || true
+          cat prepr-result.json
+
+      - name: Post PR comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('prepr-result.json', 'utf-8'));
+
+            const riskEmoji = { HIGH: '🚫', MEDIUM: '⚠️', LOW: '🟡', NONE: '✅' };
+            const emoji = riskEmoji[report.risk] ?? '🔍';
+
+            const fixes = (report.fixPriority ?? [])
+              .map((f, i) => `${i + 1}. ${f.action} (+${f.gain} pts)`)
+              .join('\n');
+
+            const body = [
+              '## 🔍 PrePr Risk Report',
+              '',
+              `**Score:** ${report.score}/100`,
+              `**Merge Risk:** ${emoji} ${report.riskLabel}`,
+              '',
+              `| Severity | Count |`,
+              `|----------|-------|`,
+              `| 🔴 High   | ${report.summary.high} |`,
+              `| 🟡 Medium | ${report.summary.medium} |`,
+              `| 🟢 Low    | ${report.summary.low} |`,
+              '',
+              fixes ? `### 🔥 Fix Order\n\`\`\`\n${fixes}\n\`\`\`` : '',
+              '',
+              '> Full HTML report available in workflow **Artifacts**.',
+              '_Posted by [PrePr](https://github.com/singhbox/prepr) — PR Risk Analyzer_'
+            ].filter(Boolean).join('\n');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body
+            });
+
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: prepr-report
+          path: .prepr/report.html
+          retention-days: 30
+
+      - name: Fail check if HIGH risk
+        run: |
+          node -e "
+            const r = require('./prepr-result.json');
+            if (r.summary.high > 0) {
+              console.error('PrePr: HIGH risk violations detected — merge blocked');
+              process.exit(1);
+            }
+            console.log('PrePr: Risk level acceptable ✅');
+          "

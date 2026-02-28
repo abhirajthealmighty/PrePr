@@ -2,9 +2,10 @@
   "name": "prepr",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "dev": "tsx src/index.ts scan",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

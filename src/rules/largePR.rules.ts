@@ -2,6 +2,9 @@ import type { Rule } from "./types.js";
 
 export const LargePRRule: Rule = {
   name: "large-pr",
+  description: "Flags PRs that exceed the maximum allowed line additions",
+  scope: "pr",
+  enabledByDefault: true,
 
   check(analysis) {
     let totalAdditions = 0;
@@ -14,7 +17,8 @@ export const LargePRRule: Rule = {
       return [
         {
           message: "PR too large (>300 lines)",
-          severity: "high"
+          severity: "high",
+          confidence: "high"
         }
       ];
     }

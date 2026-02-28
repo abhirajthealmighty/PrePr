@@ -1,0 +1,40 @@
+import { readFileSync, existsSync } from "fs";
+import { join } from "path";
+
+export interface PreprConfig {
+  baseBranch: string;
+  maxPRLines: number;
+  ignore: string[];
+  rules: Record<string, boolean>;
+}
+
+export const defaultConfig: PreprConfig = {
+  baseBranch: "main",
+  maxPRLines: 300,
+  ignore: ["dist/", "node_modules/", "coverage/"],
+  rules: {
+    "large-pr": true,
+    "risky-file": true,
+    "todo-detector": true,
+    "console-log": true
+  }
+};
+
+export function loadConfig(cwd: string = process.cwd()): PreprConfig {
+  const configPath = join(cwd, "prepr.config.json");
+
+  if (!existsSync(configPath)) return defaultConfig;
+
+  try {
+    const parsed = JSON.parse(readFileSync(configPath, "utf-8")) as Partial<PreprConfig>;
+    return {
+      ...defaultConfig,
+      ...parsed,
+      // Deep merge rules so partial overrides work
+      rules: { ...defaultConfig.rules, ...(parsed.rules ?? {}) }
+    };
+  } catch {
+    console.warn("Warning: Could not parse prepr.config.json — using defaults.");
+    return defaultConfig;
+  }
+}

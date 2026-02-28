@@ -1,4 +1,4 @@
-import simpleGit from "simple-git";
+import { simpleGit } from "simple-git";
 
 export async function getGitDiff(baseBranch: string = "main"): Promise<string> {
   const git = simpleGit();
