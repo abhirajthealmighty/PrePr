@@ -215,6 +215,19 @@ program
       writeFileSync(configPath, JSON.stringify(config, null, 2) + "\n", "utf-8");
       console.log(chalk.green("✅ Created prepr.config.json"));
 
+      // Write .preprignore
+      const preprignorePath = join(cwd, ".preprignore");
+      const preprignore = `dist/
+node_modules/
+coverage/
+.next/
+.nuxt/
+build/
+out/
+`;
+      writeFileSync(preprignorePath, preprignore, "utf-8");
+      console.log(chalk.green("✅ Created .preprignore"));
+
       // Write .github/workflows/prepr.yml
       const workflowDir = join(cwd, ".github", "workflows");
       mkdirSync(workflowDir, { recursive: true });
