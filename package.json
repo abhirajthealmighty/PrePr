@@ -1,31 +1,92 @@
 {
   "name": "prepr-cli",
-  "version": "1.0.5",
-  "description": "PR Risk Analyzer — scores merge safety and blocks unsafe pull requests",
+  "version": "1.0.6",
+  "description": "CLI tool that analyzes pull requests, detects risky code changes, scores merge safety, and blocks unsafe PRs in CI before production.",
   "main": "dist/index.js",
+  "type": "module",
+
+  "bin": {
+    "prepr": "dist/index.js"
+  },
+
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
     "dev": "tsx src/index.ts scan",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "review": "prepr scan --html; open .prepr/report.html"
+    "review": "prepr scan --html && open .prepr/report.html",
+    "test": "echo \"No tests yet\""
   },
-  "keywords": ["pr", "git", "code-review", "risk", "ci", "github-actions", "devtools"],
+
+  "keywords": [
+    "pull-request",
+    "pull-request-review",
+    "pr-review",
+    "pr-check",
+    "pr-analysis",
+    "merge-risk",
+    "code-review",
+    "automated-code-review",
+    "git",
+    "git-cli",
+    "git-hooks",
+    "pre-push-hook",
+    "pre-commit",
+    "ci",
+    "ci-cd",
+    "continuous-integration",
+    "github",
+    "github-actions",
+    "github-pr",
+    "devops",
+    "developer-tools",
+    "engineering-productivity",
+    "code-quality",
+    "static-analysis",
+    "diff-analysis",
+    "repository-analysis",
+    "risk-analysis",
+    "merge-check",
+    "pr-scanner",
+    "review-automation",
+    "production-safety",
+    "node-cli",
+    "typescript-cli"
+  ],
+
   "author": "abhirajthealmighty",
   "license": "ISC",
-  "type": "module",
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abhirajthealmighty/PrePr.git"
+  },
+
+  "homepage": "https://github.com/abhirajthealmighty/PrePr#readme",
+
+  "bugs": {
+    "url": "https://github.com/abhirajthealmighty/PrePr/issues"
+  },
+
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+
+  "engines": {
+    "node": ">=18"
+  },
+
   "dependencies": {
     "chalk": "^5.6.2",
     "commander": "^14.0.3",
     "simple-git": "^3.32.3"
   },
+
   "devDependencies": {
     "@types/node": "^25.3.2",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
-  },
-  "bin": {
-    "prepr": "dist/index.js"
   }
 }
