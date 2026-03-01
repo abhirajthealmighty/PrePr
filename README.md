@@ -1,16 +1,18 @@
 # PrePr — Stop Risky Pull Requests Before They Merge
 
-> Automatically score every PR for merge risk. Block unsafe changes before they reach production.
+> PrePr analyzes your git diff and predicts PR merge risk before code review begins.
 
 [![npm version](https://img.shields.io/npm/v/prepr-cli.svg)](https://www.npmjs.com/package/prepr-cli)
 [![license](https://img.shields.io/badge/license-ISC-blue.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/abhirajthealmighty/PrePr/pulls)
+[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-ready-blue?logo=github-actions)](https://github.com/abhirajthealmighty/PrePr/blob/main/.github/workflows/prepr.yml)
 [![PrePr enabled](https://img.shields.io/badge/PrePr-enabled-blueviolet)](https://github.com/abhirajthealmighty/PrePr)
 
 ---
 
-## How it works
+## ⚡ See PrePr in Action
 
-![PrePr demo](assets/prepr-demo.gif)
+![PrePr Demo](assets/prepr-demo.gif)
 
 ---
 
@@ -20,11 +22,61 @@
 npx prepr-cli init
 ```
 
-This sets up PrePr in any repository — creates a config file, adds the GitHub Action, and sets up ignore rules. Open a PR and PrePr runs automatically.
+Creates a GitHub Action, config file, and ignore rules in your repo. Open a PR — PrePr runs automatically.
 
 ---
 
-## What it looks like
+## Who is this for?
+
+✅ Teams reviewing large, fast-moving PRs  
+✅ Startups without strict review gates  
+✅ Security-sensitive services (auth, payments, infra)  
+✅ Repos with many contributors and frequent merges  
+✅ Any team that has merged a PR that caused a production incident  
+
+---
+
+## Zero config. Any language. Instant results.
+
+⚡ Works on **any language** — diff-based, not AST-based  
+⚡ **No repo changes** required to start  
+⚡ Runs in **under 2 seconds**  
+⚡ **8 built-in rules** covering PR size, risky files, missing tests, debug artifacts  
+⚡ **Blocks merge** automatically when HIGH risk detected  
+
+---
+
+## GitHub PR Comment (automatic)
+
+Every PR gets a risk summary posted automatically:
+
+```
+🔍 PrePr Risk Report
+
+Score: 55/100
+Merge Risk: 🚫 HIGH
+
+| Severity | Count |
+|----------|-------|
+| 🔴 High   | 1     |
+| 🟡 Medium | 2     |
+| 🟢 Low    | 1     |
+
+🔥 Fix Order
+1. Request security review for risky file (+20 pts)
+2. Add tests for changed modules (+10 pts)
+```
+
+Your CI checks show:
+```
+✅ Tests passed
+✅ Build passed
+❌ PrePr Risk Analysis — HIGH risk detected
+```
+
+---
+
+## What the terminal output looks like
 
 ```
 Running PrePr scan...
@@ -63,33 +115,11 @@ Final Score                55/100
 
 ---
 
-## GitHub PR Comment (automatic)
+## Try PrePr instantly
 
-Every PR gets a risk summary posted automatically:
+Fork this demo repo and open a PR to see PrePr analyze your changes automatically:
 
-```
-🔍 PrePr Risk Report
-
-Score: 55/100
-Merge Risk: 🚫 HIGH
-
-| Severity | Count |
-|----------|-------|
-| 🔴 High   | 1     |
-| 🟡 Medium | 2     |
-| 🟢 Low    | 1     |
-
-🔥 Fix Order
-1. Request security review for risky file (+20 pts)
-2. Add tests for changed modules (+10 pts)
-```
-
-Your CI checks will show:
-```
-✅ Tests passed
-✅ Build passed
-❌ PrePr Risk Analysis — HIGH risk detected
-```
+👉 **[prepr-demo-risky-pr](https://github.com/abhirajthealmighty/prepr-demo-risky-pr)** *(coming soon)*
 
 ---
 
@@ -117,22 +147,7 @@ Creates:
 - `prepr.config.json` — configure rules, base branch, ignored paths
 - `.preprignore` — paths to exclude from analysis
 
-Commit these files and PrePr runs automatically on every PR.
-
----
-
-## CLI
-
-```bash
-prepr scan                    # Scan current diff vs main
-prepr scan --base develop     # Diff against a different branch
-prepr scan --html             # Generate .prepr/report.html
-prepr scan --format json      # Structured JSON output (for CI)
-prepr scan --github           # Post comment to GitHub PR
-
-prepr init                    # Set up PrePr in this repo
-prepr install                 # Install pre-push git hook
-```
+Commit these files. PrePr runs automatically on every PR.
 
 ---
 
@@ -149,8 +164,6 @@ prepr install                 # Install pre-push git hook
 | `large-function` | >80 consecutive added lines without a break | 🟡 Medium |
 | `debug-artifact` | `console.log`, `debugger`, `printStackTrace` etc. | 🟢 Low |
 
-All rules are diff-based — works on any language.
-
 ---
 
 ## Configuration
@@ -160,7 +173,7 @@ All rules are diff-based — works on any language.
 {
   "baseBranch": "main",
   "maxPRLines": 300,
-  "ignore": ["dist/", "node_modules/", "coverage/"],
+  "ignore": ["dist/", "node_modules/", "coverage/", ".prepr/"],
   "rules": {
     "large-pr": true,
     "missing-test": false,
@@ -181,7 +194,20 @@ All rules are diff-based — works on any language.
 | DangerJS | Custom PR rules (config-heavy) |
 | **PrePr** | **Merge risk — zero config, any language** |
 
-PrePr works on any git repository, any language, with zero configuration to get started.
+---
+
+## CLI Reference
+
+```bash
+prepr scan                    # Scan current diff vs main
+prepr scan --base develop     # Diff against a different branch
+prepr scan --html             # Generate .prepr/report.html
+prepr scan --format json      # Structured JSON output (for CI)
+prepr scan --github           # Post comment to GitHub PR
+
+prepr init                    # Set up PrePr in this repo
+prepr install                 # Install pre-push git hook
+```
 
 ---
 
@@ -215,6 +241,8 @@ npm install
 npm run dev      # Run in development
 npm run build    # Compile TypeScript
 ```
+
+PRs welcome — especially new rules, language-specific patterns, and CI integrations.
 
 ---
 
