@@ -8,6 +8,12 @@
 
 ---
 
+## How it works
+
+![PrePr demo](assets/prepr-demo.gif)
+
+---
+
 ## One command to get started
 
 ```bash

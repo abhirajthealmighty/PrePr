@@ -4,6 +4,8 @@
   "ignore": [
     "dist/",
     "node_modules/",
+    "coverage/",
+    ".prepr/",
     "src/rules/",
     "src/formatter/",
     "src/scoring/"

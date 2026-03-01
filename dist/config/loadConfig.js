@@ -3,7 +3,7 @@ import { join } from "path";
 export const defaultConfig = {
     baseBranch: "main",
     maxPRLines: 300,
-    ignore: ["dist/", "node_modules/", "coverage/"],
+    ignore: ["dist/", "node_modules/", "coverage/", ".prepr/"],
     rules: {
         "large-pr": true,
         "risky-file": true,

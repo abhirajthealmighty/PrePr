@@ -1,10 +1,7 @@
 export function calculateScoreS(
   name: String
 ): number {
-
-  let score = 100;
-
-  console.log(name);
-
-  return Math.max(score, 0);
+    // use less code added and removed
+    console.log("removed use less code");
+    return 0;
 }

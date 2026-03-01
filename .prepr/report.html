@@ -30,7 +30,7 @@
     .score-card .card-value { color: #ef4444; font-size: 2.5rem; }
     .score-label { font-size: 0.75rem; margin-top: 0.4rem; color: #ef4444; font-weight: 600; }
     .gauge { width: 100%; height: 8px; background: #334155; border-radius: 9999px; margin-top: 0.5rem; overflow: hidden; }
-    .gauge-fill { height: 100%; border-radius: 9999px; background: #ef4444; width: 55%; }
+    .gauge-fill { height: 100%; border-radius: 9999px; background: #ef4444; width: 5%; }
     .large-warning { display: inline-block; font-size: 0.7rem; font-weight: 600; background: #431407; color: #fcd34d; padding: 0.15rem 0.45rem; border-radius: 0.25rem; vertical-align: middle; margin-left: 0.4rem; }
 
     /* Sections */
@@ -100,12 +100,12 @@
   <!-- Sticky mini-header (visible while scrolling) -->
   <div class="sticky-header">
     <span class="sticky-risk">🚫 HIGH risk</span>
-    <span class="sticky-score">Score: <strong>55/100</strong> — Needs Attention</span>
-    <span class="sticky-summary">🔴 1 · 🟡 2 · 🟢 1</span>
+    <span class="sticky-score">Score: <strong>5/100</strong> — Needs Attention</span>
+    <span class="sticky-summary">🔴 4 · 🟡 1 · 🟢 1</span>
   </div>
 
   <h1>🔍 PrePr Report</h1>
-  <p class="subtitle">Generated at 2/28/2026, 3:15:58 PM</p>
+  <p class="subtitle">Generated at 1/3/2026, 1:12:39 pm</p>
 
   <!-- Merge Risk Banner -->
   <div class="risk-banner">
@@ -116,25 +116,25 @@
   <div class="grid">
     <div class="card score-card">
       <div class="card-label">Score</div>
-      <div class="card-value">55<span style="font-size:1rem;color:#64748b">/100</span></div>
+      <div class="card-value">5<span style="font-size:1rem;color:#64748b">/100</span></div>
       <div class="score-label">Needs Attention</div>
       <div class="gauge"><div class="gauge-fill"></div></div>
     </div>
     <div class="card">
       <div class="card-label">Files Changed</div>
-      <div class="card-value">14</div>
+      <div class="card-value">7</div>
     </div>
     <div class="card">
       <div class="card-label">Lines Added</div>
-      <div class="card-value" style="color:#22c55e">+451<span class="large-warning">⚠️ Large PR</span></div>
+      <div class="card-value" style="color:#22c55e">+49</div>
     </div>
     <div class="card">
       <div class="card-label">Lines Deleted</div>
-      <div class="card-value" style="color:#ef4444">-22</div>
+      <div class="card-value" style="color:#ef4444">-107</div>
     </div>
     <div class="card">
       <div class="card-label">Est. Review Time</div>
-      <div class="card-value" style="font-size:1.2rem;color:#94a3b8">67–77 mins</div>
+      <div class="card-value" style="font-size:1.2rem;color:#94a3b8">63–73 mins</div>
     </div>
     
   </div>
@@ -142,12 +142,12 @@
   <!-- Merge Recommendation (actionable) -->
   <div class="section">
     <h2>Recommendation</h2>
-    <div class="recommendation" style="color:#f97316">
-      🚨&nbsp; <strong>Needs Attention</strong>
+    <div class="recommendation" style="color:#ef4444">
+      ❌&nbsp; <strong>Block Merge</strong>
     </div>
     
     <ul class="rec-actions">
-      <li>✓ Request security review for auth/risky changes</li><li>✓ Add tests for changed modules</li><li>✓ Resolve TODO/FIXME comments before merge</li>
+      <li>✓ Request security review for auth/risky changes</li><li>✓ Review dependency changes carefully</li><li>✓ Add tests for changed modules</li>
     </ul>
   </div>
 
@@ -158,23 +158,28 @@
     <div class="fix-list">
     <div class="fix-item">
       <span class="fix-num">1</span>
-      <span class="fix-action">Request security review for risky file</span>
+      <span class="fix-action">Review dependency change for supply chain risk</span>
       <span class="fix-gain">+20 pts</span>
     </div>
     <div class="fix-item">
       <span class="fix-num">2</span>
-      <span class="fix-action">Add tests for changed modules</span>
-      <span class="fix-gain">+10 pts</span>
+      <span class="fix-action">Request security review for risky file</span>
+      <span class="fix-gain">+20 pts</span>
     </div>
     <div class="fix-item">
       <span class="fix-num">3</span>
-      <span class="fix-action">Resolve TODO/FIXME comments before merge</span>
-      <span class="fix-gain">+10 pts</span>
+      <span class="fix-action">Request security review for risky file</span>
+      <span class="fix-gain">+20 pts</span>
     </div>
     <div class="fix-item">
       <span class="fix-num">4</span>
-      <span class="fix-action">Remove debug artifacts and console statements</span>
-      <span class="fix-gain">+5 pts</span>
+      <span class="fix-action">Request security review for risky file</span>
+      <span class="fix-gain">+20 pts</span>
+    </div>
+    <div class="fix-item">
+      <span class="fix-num">5</span>
+      <span class="fix-action">Add tests for changed modules</span>
+      <span class="fix-gain">+10 pts</span>
     </div></div>
   </div>
 
@@ -184,8 +189,8 @@
     <h2>Score Breakdown</h2>
     <table class="breakdown-table">
       <tbody>
-        <tr><td>7 source file(s) modified but no test files upd...</td><td class="penalty">−10</td></tr><tr><td>Risky file modified: src/auth/loginService.ts</td><td class="penalty">−20</td></tr><tr><td>TODO/FIXME found at lines 59</td><td class="penalty">−10</td></tr><tr><td>Debug artifacts found at lines 33, 41, 53, 54, ...</td><td class="penalty">−5</td></tr>
-        <tr class="total-row"><td><strong>Final Score</strong></td><td class="penalty"><strong>55/100</strong></td></tr>
+        <tr><td>3 source file(s) modified but no test files upd...</td><td class="penalty">−10</td></tr><tr><td>Dependency file modified: package.json</td><td class="penalty">−20</td></tr><tr><td>Risky file modified: prepr.config.json</td><td class="penalty">−20</td></tr><tr><td>Risky file modified: src/auth/loginService.ts</td><td class="penalty">−20</td></tr><tr><td>Risky file modified: src/config/loadConfig.ts</td><td class="penalty">−20</td></tr><tr><td>Debug artifacts found at lines 5</td><td class="penalty">−5</td></tr>
+        <tr class="total-row"><td><strong>Final Score</strong></td><td class="penalty"><strong>5/100</strong></td></tr>
       </tbody>
     </table>
   </div>
@@ -194,8 +199,8 @@
   <div class="section">
     <h2>Summary</h2>
     <div class="summary-row">
-      <span>🔴 High: <strong style="color:#fca5a5">1</strong></span>
-      <span>🟡 Medium: <strong style="color:#fcd34d">2</strong></span>
+      <span>🔴 High: <strong style="color:#fca5a5">4</strong></span>
+      <span>🟡 Medium: <strong style="color:#fcd34d">1</strong></span>
       <span>🟢 Low: <strong style="color:#86efac">1</strong></span>
     </div>
   </div>
@@ -207,21 +212,17 @@
     <details class="severity-group high" open>
       <summary class="severity-summary">
         <span class="badge high">🔴 HIGH</span>
-        <span class="count">1 issue</span>
+        <span class="count">4 issues</span>
         <span class="chevron">▾</span>
       </summary>
-      <div class="violation-list"><div class="violation"><p class="violation-msg">Risky file modified: src/auth/loginService.ts</p></div></div></details>
+      <div class="violation-list"><div class="violation"><p class="violation-msg">Dependency file modified: package.json</p></div><div class="violation"><p class="violation-msg">Risky file modified: prepr.config.json</p></div><div class="violation"><p class="violation-msg">Risky file modified: src/auth/loginService.ts</p></div><div class="violation"><p class="violation-msg">Risky file modified: src/config/loadConfig.ts</p></div></div></details>
     <details class="severity-group medium" open>
       <summary class="severity-summary">
         <span class="badge medium">🟡 MEDIUM</span>
-        <span class="count">2 issues</span>
+        <span class="count">1 issue</span>
         <span class="chevron">▾</span>
       </summary>
-      <div class="violation-list"><div class="violation"><p class="violation-msg">7 source file(s) modified but no test files updated</p></div><div class="violation">
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:59" class="location" target="_blank">src/index.ts:59</a>
-            <pre class="code">// TODO remove debug logic</pre>
-          </div></div></div></details>
+      <div class="violation-list"><div class="violation"><p class="violation-msg">3 source file(s) modified but no test files updated</p></div></div></details>
     <details class="severity-group low" >
       <summary class="severity-summary">
         <span class="badge low">🟢 LOW</span>
@@ -230,68 +231,8 @@
       </summary>
       <div class="violation-list"><div class="violation">
           <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:33" class="location" target="_blank">src/index.ts:33</a>
-            <pre class="code">console.log(chalk.cyan(&quot;Running PrePr scan...\n&quot;));</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:41" class="location" target="_blank">src/index.ts:41</a>
-            <pre class="code">console.log(chalk.yellow(&quot;No changes detected.&quot;));</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:53" class="location" target="_blank">src/index.ts:53</a>
-            <pre class="code">console.log(chalk.bold(&quot;PrePr Metrics&quot;));</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:54" class="location" target="_blank">src/index.ts:54</a>
-            <pre class="code">console.log(&quot;----------------&quot;);</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:55" class="location" target="_blank">src/index.ts:55</a>
-            <pre class="code">console.log(`Files changed : ${metrics.filesChanged}`);</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:56" class="location" target="_blank">src/index.ts:56</a>
-            <pre class="code">console.log(`Lines added   : +${metrics.linesAdded}`);</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:57" class="location" target="_blank">src/index.ts:57</a>
-            <pre class="code">console.log(`Lines deleted : -${metrics.linesDeleted}`);</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:60" class="location" target="_blank">src/index.ts:60</a>
-            <pre class="code">console.log(&quot;debug&quot;);</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:75" class="location" target="_blank">src/index.ts:75</a>
-            <pre class="code">console.log(&quot;\n&quot; + chalk.bold(&quot;PrePr Violations&quot;));</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:76" class="location" target="_blank">src/index.ts:76</a>
-            <pre class="code">console.log(&quot;----------------&quot;);</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:79" class="location" target="_blank">src/index.ts:79</a>
-            <pre class="code">console.log(chalk.green(&quot;✅ No issues found&quot;));</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:82" class="location" target="_blank">src/index.ts:82</a>
-            <pre class="code">console.log(</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:100" class="location" target="_blank">src/index.ts:100</a>
-            <pre class="code">console.log(</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:107" class="location" target="_blank">src/index.ts:107</a>
-            <pre class="code">console.log(&quot;\n&quot; + chalk.gray(&quot;Scan complete ✅&quot;));</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:109" class="location" target="_blank">src/index.ts:109</a>
-            <pre class="code">console.error(chalk.red(&quot;\nPrePr failed ❌&quot;));</pre>
-          </div>
-          <div class="violation-line">
-            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/index.ts:110" class="location" target="_blank">src/index.ts:110</a>
-            <pre class="code">console.error(chalk.red(err.message));</pre>
+            <a href="vscode://file//Users/singhbox/Desktop/Random/Saas/prepr/src/auth/loginService.ts:5" class="location" target="_blank">src/auth/loginService.ts:5</a>
+            <pre class="code">console.log(&quot;removed use less code&quot;);</pre>
           </div></div></div></details>
   </div>
 

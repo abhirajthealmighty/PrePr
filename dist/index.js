@@ -178,7 +178,7 @@ program
         const config = {
             baseBranch: "main",
             maxPRLines: 300,
-            ignore: ["dist/", "node_modules/", "coverage/"],
+            ignore: ["dist/", "node_modules/", "coverage/", ".prepr/"],
             rules: {
                 "large-pr": true,
                 "risk-concentration": true,
@@ -197,6 +197,7 @@ program
         const preprignore = `dist/
 node_modules/
 coverage/
+.prepr/
 .next/
 .nuxt/
 build/
