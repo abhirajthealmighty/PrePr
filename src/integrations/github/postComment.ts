@@ -84,7 +84,8 @@ export function buildPRComment(
   lines.push("---");
   lines.push(`**Summary:** 🔴 ${high} high · 🟡 ${medium} medium · 🟢 ${low} low`);
   lines.push("");
-  lines.push("_Posted by [PrePr](https://github.com/prepr) — PR Risk Analyzer_");
+  lines.push("---");
+  lines.push("_🔍 Risk analyzed by [PrePr](https://github.com/abhirajthealmighty/PrePr) · `npx prepr-cli init` to add to your repo_");
 
   return lines.join("\n");
 }

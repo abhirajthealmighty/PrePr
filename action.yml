@@ -1,0 +1,99 @@
+name: PrePr Risk Analysis
+description: Analyze PR merge risk and block unsafe pull requests before they reach production
+author: abhirajthealmighty
+
+branding:
+  icon: shield
+  color: red
+
+inputs:
+  base-branch:
+    description: Base branch to diff against
+    required: false
+    default: main
+  fail-on-high:
+    description: Exit with code 1 when HIGH risk violations are found
+    required: false
+    default: "true"
+  token:
+    description: GitHub token for posting PR comments
+    required: false
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+
+    - name: Run PrePr scan
+      shell: bash
+      run: |
+        npx prepr-cli@latest scan --format json --html --base ${{ inputs.base-branch }} > prepr-result.json || true
+        cat prepr-result.json
+
+    - name: Post PR comment
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ inputs.token }}
+        script: |
+          const fs = require('fs');
+          if (!fs.existsSync('prepr-result.json')) return;
+          const report = JSON.parse(fs.readFileSync('prepr-result.json', 'utf-8'));
+
+          const riskEmoji = { HIGH: '🚫', MEDIUM: '⚠️', LOW: '🟡', NONE: '✅' };
+          const emoji = riskEmoji[report.risk] ?? '🔍';
+
+          const fixes = (report.fixPriority ?? [])
+            .map((f, i) => `${i + 1}. ${f.action} (+${f.gain} pts)`)
+            .join('\n');
+
+          const body = [
+            '## 🔍 PrePr Risk Report',
+            '',
+            `**Score:** ${report.score}/100`,
+            `**Merge Risk:** ${emoji} ${report.riskLabel}`,
+            '',
+            `| Severity | Count |`,
+            `|----------|-------|`,
+            `| 🔴 High   | ${report.summary.high} |`,
+            `| 🟡 Medium | ${report.summary.medium} |`,
+            `| 🟢 Low    | ${report.summary.low} |`,
+            '',
+            fixes ? `### 🔥 Fix Order\n\`\`\`\n${fixes}\n\`\`\`` : '',
+            '',
+            '---',
+            '_🔍 Risk analyzed by [PrePr](https://github.com/abhirajthealmighty/PrePr) · `npx prepr-cli init` to add to your repo_'
+          ].filter(Boolean).join('\n');
+
+          if (context.eventName === 'pull_request') {
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body
+            });
+          }
+
+    - name: Upload HTML Report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: prepr-report
+        path: .prepr/report.html
+        retention-days: 30
+
+    - name: Fail if HIGH risk
+      if: inputs.fail-on-high == 'true'
+      shell: bash
+      run: |
+        node -e "
+          const r = require('./prepr-result.json');
+          if (r.summary.high > 0) {
+            console.error('PrePr: HIGH risk violations detected — merge blocked');
+            process.exit(1);
+          }
+          console.log('PrePr: Risk level acceptable ✅');
+        "

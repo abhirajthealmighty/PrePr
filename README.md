@@ -135,6 +135,19 @@ npm install -g prepr-cli
 
 ---
 
+## GitHub Action Marketplace
+
+Use PrePr directly as a GitHub Action:
+
+```yaml
+- uses: abhirajthealmighty/PrePr@main
+  with:
+    base-branch: main
+    fail-on-high: "true"
+```
+
+---
+
 ## Setup in your repo
 
 ```bash

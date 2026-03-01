@@ -11,7 +11,6 @@ import { parseDiff } from "./core/diffParser.js";
 import { analyzeDiff } from "./analyzer.js";
 import { runRules } from "./rules/runner.js";
 import { LargePRRule } from "./rules/largePR.rules.js";
-import { ConsoleLogRule } from "./rules/consoleLog.rule.js";
 import { TodoRule } from "./rules/todo.rule.js";
 import { RiskyFileRule } from "./rules/riskyFile.rule.js";
 import { MissingTestRule } from "./rules/missingTest.rule.js";

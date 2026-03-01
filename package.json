@@ -1,13 +1,14 @@
 {
   "name": "prepr-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "PR Risk Analyzer — scores merge safety and blocks unsafe pull requests",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
     "dev": "tsx src/index.ts scan",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "review": "prepr scan --html; open .prepr/report.html"
   },
   "keywords": ["pr", "git", "code-review", "risk", "ci", "github-actions", "devtools"],
   "author": "abhirajthealmighty",
