@@ -1,6 +1,9 @@
 # Source files (dist/ is what gets published)
 src/
 
+# Assets (GIF for README, not needed in npm package)
+assets/
+
 # Development files
 .prepr/
 .preprignore
