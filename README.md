@@ -119,7 +119,7 @@ Final Score                55/100
 
 Fork this demo repo and open a PR to see PrePr analyze your changes automatically:
 
-👉 **[prepr-demo-risky-pr](https://github.com/abhirajthealmighty/prepr-demo-risky-pr)** *(coming soon)*
+👉 **[prepr-demo-risky-pr](https://github.com/abhirajthealmighty/prepr-demo-risky-pr)**
 
 ---
 
