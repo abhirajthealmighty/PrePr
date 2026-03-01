@@ -12,7 +12,7 @@
 
 ## ⚡ See PrePr in Action
 
-![PrePr Demo](assets/prepr-demo.gif)
+![PrePr Demo](https://raw.githubusercontent.com/abhirajthealmighty/PrePr/main/assets/prepr-demo.gif)
 
 ---
 
